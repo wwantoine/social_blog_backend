@@ -8,7 +8,7 @@ const mongoURI = process.env.MONGODB_URI;
 const utilsHelper = require("./helpers/utils.helper");
 const cors = require("cors");
 const passport = require("passport");
-require("./helpers/passport");
+require("./helpers/passport.helper");
 
 var indexRouter = require("./routes/index");
 
