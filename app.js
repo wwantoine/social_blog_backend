@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 const mongoURI = process.env.MONGODB_URI;
 const utilsHelper = require("./helpers/utils.helper");
 const cors = require("cors");
+const passport = require("passport");
+require("./helpers/passport");
 
 var indexRouter = require("./routes/index");
 
@@ -18,6 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(passport.initialize());
 
 /* DB Connections */
 mongoose

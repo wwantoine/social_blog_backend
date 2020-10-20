@@ -3,6 +3,7 @@ const router = express.Router();
 const validators = require("../middlewares/validators");
 const { body } = require("express-validator");
 const authController = require("../controllers/auth.controller");
+const passport = require("passport");
 
 /**
  * @route POST api/auth/login
@@ -23,6 +24,12 @@ router.post(
  * @description Login with facebook
  * @access Public
  */
+
+router.post(
+  "/login/facebook",
+  passport.authenticate("facebook-token"),
+  authController.loginWithFacebookOrGoogle
+);
 
 /**
  * @route POST api/auth/login/google
