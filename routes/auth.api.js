@@ -36,5 +36,10 @@ router.post(
  * @description Login with google
  * @access Public
  */
+router.post(
+  "/login/google",
+  passport.authenticate("google-token"),
+  authController.loginWithFacebookOrGoogle
+);
 
 module.exports = router;

@@ -45,3 +45,27 @@ passport.use(
     }
   )
 );
+
+passport.use(
+  new GoogleTokenStrategy(
+    { clientID: GOOGLE_CLIENT_ID, clientSecret: GOOGLE_CLIENT_SECRET },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        // Extract the minimal profile information we need from the profile object
+        const user = {
+          name: profile.displayName,
+          firstName: profile.name.givenName,
+          lastName: profile.name.familyName,
+          email: profile.emails[0].value,
+          avatarUrl: profile._json.picture,
+          provider: "google",
+          googleID: profile.id,
+        };
+        return done(null, user);
+      } catch (err) {
+        console.log("GOOGLE TOKEN STRATEGY:", err);
+        return done(err, null);
+      }
+    }
+  )
+);
